@@ -47,8 +47,34 @@ const controls = new OrbitControls(camera, renderer.domElement);
 
 
 // add random items
-// continue
+function addStar() {
+  const geometry = new THREE.SphereGeometry(0.25, 24, 24);
+  const material = new THREE.MeshStandardMaterial({color:0xffffff});
+  const star = new THREE.Mesh(geometry, material);
 
+  const [x, y , z] = Array(3)
+    .fill()
+    .map(() => THREE.MathUtils.randFloatSpread(100));
+
+  star.position.set(x, y, z);
+  scene.add(star);
+}
+
+Array(200).fill().forEach(addStar)
+
+
+// background
+const spaceTexture = new THREE.TextureLoader().load('space.jpg');
+scene.background = spaceTexture;
+
+// avatar
+const chamathTexture = new THREE.TextureLoader().load('me.jpg');
+const chamath = new THREE.Mesh(new THREE.BoxGeometry(3, 3, 3), new THREE.MeshBasicMaterial({map: chamathTexture}));
+
+scene.add(chamath);
+
+
+// moon
 
 
 // animation Loop
